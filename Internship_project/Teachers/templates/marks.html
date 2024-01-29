@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Marks</title>
+
+    <style>
+         ::-webkit-scrollbar{
+            display: none;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #100721;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #d0d1bf;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 800px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .heading {
+            color: #333;
+            text-align: center;
+        }
+
+        .student_info,
+        .student_marks {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            border: 2px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        input,
+        select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="student_info">
+            <h2 class="heading">Student Info</h2>
+
+            <div class="student_info_table">
+                <table>
+                    <form action="" method="post">
+
+                        <label for="student_name">Student Name : </label>
+                        <input type="text" name="student_name" id="student_name">
+
+                        <label for="student_department">Department : </label>
+                        <input type="text" name="student_department" id="student_department">
+
+                        <label for="student_sem">Semister : </label>
+                        <select name="student_sem" id="student_sem">
+                            <option> </option>
+                            <option value="1st sem">1st Sem</option>
+                            <option value="2nd sem">2nd Sem</option>
+                            <option value="3rd Sem">3rd Sem</option>
+                            <option value="4th sem">4th Sem</option>
+                            <option value="5th Sem">5th Sem</option>
+                            <option value="6th Sem">6th Sem</option>
+                        </select>
+                        <label for="regNo">Enter Student's registration number:</label>
+                        <input type="text" name="regNo" id="regNo" required>
+                    </form>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="student_marks">
+
+            <h2 class="heading">Student Marks</h2>
+
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <td> <label for="subject1">C Program : </label>
+                            <input type="text" name="subject1" id="subject1" required>
+                        </td>
+                        <td> <label for="internal1">Python : </label>
+                            <input type="number" name="internal1" id="internal1" required>
+                        </td>
+                        <td><label for="internal2">CSO : </label>
+                            <input type="number" name="internal2" id="internal2" required>
+                        </td>
+                        <td> <label for="final">Data Structure : </label>
+                            <input type="number" name="final" id="final" required>
+                        </td>
+                        <td> <label for="final">Algorithm : </label>
+                            <input type="number" name="final" id="final" required>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <button type="submit">Submit</button>
+    </div>
+
+</body>
+
+</html>

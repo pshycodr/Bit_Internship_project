@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #100721;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        form button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        form button:hover {
+            background-color: #3a8e3d;
+        }
+
+        .Print {
+            background-color: #243025;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        form button[type="reset"] {
+            background-color: #f44336;
+        }
+
+        form button[type="reset"]:hover {
+            background-color: rgb(181, 62, 53);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        th,
+        td {
+            border: 2px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .col1 {
+            font-weight: bolder;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <form action="" method="post">
+            <label for="regNo">Enter your registration number:</label>
+            <input type="text" name="regNo" id="regNo" required>
+            <button type="submit">Get Marks</button>
+            <button type="reset">Reset</button>
+        </form>
+
+        <table class="student_info">
+            <tr>
+                <td>Register Number</td>
+                <td>11646464563</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>Anish Roy</td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td>20.10.2004</td>
+            </tr>
+        </table>
+
+        <table class="student_result">
+            <thead>
+                <tr>
+                    <th class="col1">Subject Name</th>
+                    <th class="col2">UE</th>
+                    <th class="col3">IA</th>
+                    <th class="col4">TOTAL</th>
+                    <th class="col5">Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col1">C Programming</td>
+                    <td class="col2">064</td>
+                    <td class="col3">025</td>
+                    <td class="col4">089</td>
+                    <td class="col5">P</td>
+                </tr>
+
+                <tr>
+                    <td class="col1">Python</td>
+                    <td class="col2"></td>
+                    <td class="col3"></td>
+                    <td class="col4"></td>
+                    <td class="col5"></td>
+                </tr>
+                <tr>
+                    <td class="col1">CSO</td>
+                    <td class="col2"></td>
+                    <td class="col3"></td>
+                    <td class="col4"></td>
+                    <td class="col5"></td>
+                </tr>
+                <tr>
+                    <td class="col1">Data Structure</td>
+                    <td class="col2"></td>
+                    <td class="col3"></td>
+                    <td class="col4"></td>
+                    <td class="col5"></td>
+                </tr>
+                <tr>
+                    <td class="col1">Algorithm</td>
+                    <td class="col2"></td>
+                    <td class="col3"></td>
+                    <td class="col4"></td>
+                    <td class="col5"></td>
+                </tr>
+
+            </tbody>
+        </table>
+        <button class="Print" type="submit">Print</button>
+    </div>
+</body>
+
+</html>
