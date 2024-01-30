@@ -109,6 +109,7 @@
 
     <div class="container">
         <form action="" method="post">
+            {% csrf_token %}
             <label for="regNo">Enter your registration number:</label>
             <input type="text" name="regNo" id="regNo" required>
             <button type="submit">Get Marks</button>
