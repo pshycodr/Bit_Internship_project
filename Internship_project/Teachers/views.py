@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 def teacherLogin(request):
 
-    return render(request, 'marks.html')
+    return render(request, 'login.html')
