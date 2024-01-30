@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teachers SignUp page</title>
+    <title>Login page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -72,6 +72,7 @@
             text-decoration: none;
             color: crimson;
         }
+
     </style>
 
 </head>
@@ -81,26 +82,47 @@
         {% csrf_token %}
         <h2>Sign Up</h2>
 
-        <label for="loginUserEmail">Name :</label>
-        <input type="text" id="loginUserEmail" name="signupName"  required>
+        <label for="studentName">Name :</label>
+        <input type="text" id="studentName" name="studentName"  required>
 
-        <label for="loginUserEmail">Phone no. :</label>
-        <input type="number" id="loginUserEmail" name="signupNumber"  required>
+        <label for="studentRoll">Roll No. :</label>
+        <input type="text" id="studentRoll" name="studentRoll"  required>
+        <div class="selects">
+        <label for="student_department">Department : </label>
+        <select name="student_department" id="student_department">
+            <option> </option>
+            <option value="CST">CST</option>
+            <option value="IT">IT</opxtion>
+            <option value="AE">AE</option>
+            <option value="ETCE">ETCE</option>
+        </select>
+        <label for="student_sem">Semister : </label>
+        <select name="student_sem" id="student_sem">
+            <option> </option>
+            <option value="1st sem">1st Sem</option>
+            <option value="2nd sem">2nd Sem</option>
+            <option value="3rd Sem">3rd Sem</option>
+            <option value="4th sem">4th Sem</option>
+            <option value="5th Sem">5th Sem</option>
+            <option value="6th Sem">6th Sem</option>
+        </select>
+    </div>
+        <label for="studentNumber">Phone no. :</label>
+        <input type="number" id="studentNumber" name="studentNumber"  required>
 
-        <label for="loginUserEmail">Email :</label>
-        <input type="email" id="loginUserEmail" name="signupEmail" placeholder="example@mail.com" required>
+        <label for="studentEmail">Email :</label>
+        <input type="email" id="studentEmail" name="studentEmail" placeholder="example@mail.com" required>
 
-        <label for="loginPassword">Password :</label>
-        <input type="password" id="loginPassword" name="signupPassword" required>
+        <label for="studentPassword">Password :</label>
+        <input type="password" id="studentPassword" name="studentPassword" required>
 
         <button type="submit">Sign Up</button>
         <span>
-            Already have an account ?
-            <a href="{% url 'teacherLogin'%}">Login</a>
+            Already registered ?
+            <a href="{% url 'get-result' %}">Get Result</a>
         </span>
-        
-
     </form>
+    
 </body>
 
 </html>

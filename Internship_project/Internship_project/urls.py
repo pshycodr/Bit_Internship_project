@@ -23,7 +23,7 @@ from Students.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("Result/", include('Students.urls')),
+    path("student/", include('Students.urls')),
     path("teach/", include('Teachers.urls')),
     path("", include("HomePage.urls"))
 ]

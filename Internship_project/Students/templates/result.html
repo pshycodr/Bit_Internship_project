@@ -101,6 +101,10 @@
         tr:hover {
             background-color: #f1f1f1;
         }
+        h2{
+            color: #4caf50;
+            font-size: 40px;
+        }
     </style>
 
 </head>
@@ -108,17 +112,11 @@
 <body>
 
     <div class="container">
-        <form action="" method="post">
-            {% csrf_token %}
-            <label for="regNo">Enter your registration number:</label>
-            <input type="text" name="regNo" id="regNo" required>
-            <button type="submit">Get Marks</button>
-            <button type="reset">Reset</button>
-        </form>
 
+        <h2>Result:</h2>
         <table class="student_info">
             <tr>
-                <td>Register Number</td>
+                <td>Registration Number</td>
                 <td>11646464563</td>
             </tr>
             <tr>
@@ -126,8 +124,8 @@
                 <td>Anish Roy</td>
             </tr>
             <tr>
-                <td>Date of Birth</td>
-                <td>20.10.2004</td>
+                <td>Semister</td>
+                <td></td>
             </tr>
         </table>
 
@@ -135,50 +133,17 @@
             <thead>
                 <tr>
                     <th class="col1">Subject Name</th>
-                    <th class="col2">UE</th>
-                    <th class="col3">IA</th>
-                    <th class="col4">TOTAL</th>
+                    <th class="col4">Total Marks</th>
                     <th class="col5">Result</th>
                 </tr>
             </thead>
             <tbody>
+                
                 <tr>
-                    <td class="col1">C Programming</td>
-                    <td class="col2">064</td>
-                    <td class="col3">025</td>
-                    <td class="col4">089</td>
-                    <td class="col5">P</td>
-                </tr>
-
-                <tr>
-                    <td class="col1">Python</td>
-                    <td class="col2"></td>
-                    <td class="col3"></td>
+                    <td class="col1">{{}}</td>
                     <td class="col4"></td>
                     <td class="col5"></td>
                 </tr>
-                <tr>
-                    <td class="col1">CSO</td>
-                    <td class="col2"></td>
-                    <td class="col3"></td>
-                    <td class="col4"></td>
-                    <td class="col5"></td>
-                </tr>
-                <tr>
-                    <td class="col1">Data Structure</td>
-                    <td class="col2"></td>
-                    <td class="col3"></td>
-                    <td class="col4"></td>
-                    <td class="col5"></td>
-                </tr>
-                <tr>
-                    <td class="col1">Algorithm</td>
-                    <td class="col2"></td>
-                    <td class="col3"></td>
-                    <td class="col4"></td>
-                    <td class="col5"></td>
-                </tr>
-
             </tbody>
         </table>
         <button class="Print" type="submit">Print</button>
