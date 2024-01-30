@@ -14,7 +14,7 @@ firebaseConfig = {
   "messagingSenderId": "448793626916",
   "appId": "1:448793626916:web:5adbb1413560821d468bb1",
   "measurementId": "G-9090BKGJD0",
-   "databaseURL": "https://testy-64346-default-rtdb.firebaseio.com/"
+  "databaseURL": "https://testy-64346-default-rtdb.firebaseio.com/"
 }
 
 
@@ -55,8 +55,10 @@ def adminLogin(request):
     adPass = request.POST.get("Admin_Password")
     
     try:
-        if adEmail == "Administrator007@gmail.com" and adPass == "Administrator007":
-            return redirect(request, "teacherSignUp")
+        if adEmail == "Administrator007@gmail.com" and adPass == "1234567890":
+            # return redirect(request, "teacherSignUp")
+            return redirect("/teach/teacher-signup")
+
     except: 
         print("Invalid Credentials")
 
@@ -78,14 +80,12 @@ def teacherSignUp(request):
     auth.create_user_with_email_and_password(email, password) 
     database.collection('Teachers Database').document(email).set(teacher_data)
     print("account creation successful")
-    return redirect(request, "teacherLogin")
+    return redirect("/teach/teacher-Login")
 
   except:
     print("something is wrong!!")
     
   return render(request, "signup.html")
-
-
 
 
 
@@ -98,7 +98,7 @@ def teacherLogin(request):
   try:
      auth.sign_in_with_email_and_password(email, password)
      print("login successful")
-     return redirect(request, "marks")
+     return redirect( "/teach/marks")
   except:
      print("invalid credentials")
   return render(request, 'login.html')
@@ -106,21 +106,33 @@ def teacherLogin(request):
 
 
 # Input Marks
-# def marks(request):
-#   name = request.POST.get("student_name")
-#   department = request.POST.get("student_department")
-#   sem = request.POST.get("student_sem")
-#   reg = request.POST.get("regNo")
+def marks(request):
+  name = request.POST.get("student_name")
+  department = request.POST.get("student_department")
+  sem = request.POST.get("student_sem")
+  reg = request.POST.get("regNo")
 
-#   C = request.POST.get("subject1")
-#   python = request.POST.get("subject2")
-#   cso = request.POST.get("subject3")
-#   ds = request.POST.get("subject4")
-#   algo = request.POST.get("subject5")
+  C = request.POST.get("subject1")
+  python = request.POST.get("subject2")
+  cso = request.POST.get("subject3")
+  ds = request.POST.get("subject4")
+  algo = request.POST.get("subject5")
 
-#   student_info = {"Name":name, "Department": department}
+  student_info = {
+    "Name":name, 
+    "Department": department, 
+    "Semister":sem, 
+    "Registration no.":reg, 
+    "Marks":{
+      "C programming":C, 
+     "Python":python, 
+      "CSO":cso, 
+     "Data Structure":ds, 
+      "Algorithm":algo
+    },
+  }
 
-#   database.collection('Students Marks').document(reg).set(teacher_data)  
+  database.collection('Students Marks').document(reg).set(student_info)  
 
    
-#   return render (request, "marks.html")
+  return render (request, "marks.html")

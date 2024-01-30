@@ -105,8 +105,8 @@
             <h2 class="heading">Student Info</h2>
 
             <div class="student_info_table">
-                <table>
-                    <form action="" method="post">
+                <form action="" method="post">
+                    <table>
                         {% csrf_token %}
                         <label for="student_name">Student Name : </label>
                         <input type="text" name="student_name" id="student_name">
@@ -132,8 +132,8 @@
                         </select>
                         <label for="regNo">Enter Student's registration number:</label>
                         <input type="text" name="regNo" id="regNo" required>
-                    </form>
-                </table>
+
+                    </table>
             </div>
 
         </div>
