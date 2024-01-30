@@ -7,9 +7,10 @@
     <title>Input Marks</title>
 
     <style>
-         ::-webkit-scrollbar{
+        ::-webkit-scrollbar {
             display: none;
         }
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #100721;
@@ -135,30 +136,28 @@
 
             <h2 class="heading">Student Marks</h2>
 
-            <form action="" method="post">
-                {% csrf_token %}
-                <table>
-                    <tr>
-                        <td> <label for="subject1">C Program : </label>
-                            <input type="text" name="subject1" id="subject1" required>
-                        </td>
-                        <td> <label for="internal1">Python : </label>
-                            <input type="number" name="internal1" id="internal1" required>
-                        </td>
-                        <td><label for="internal2">CSO : </label>
-                            <input type="number" name="internal2" id="internal2" required>
-                        </td>
-                        <td> <label for="final">Data Structure : </label>
-                            <input type="number" name="final" id="final" required>
-                        </td>
-                        <td> <label for="final">Algorithm : </label>
-                            <input type="number" name="final" id="final" required>
-                        </td>
-                    </tr>
-                </table>
+            <table>
+                <tr>
+                    <td> <label for="subject1">C Program : </label>
+                        <input type="text" name="subject1" id="subject1" required>
+                    </td>
+                    <td> <label for="internal1">Python : </label>
+                        <input type="number" name="internal1" id="internal1" required>
+                    </td>
+                    <td><label for="internal2">CSO : </label>
+                        <input type="number" name="internal2" id="internal2" required>
+                    </td>
+                    <td> <label for="final">Data Structure : </label>
+                        <input type="number" name="final" id="final" required>
+                    </td>
+                    <td> <label for="final">Algorithm : </label>
+                        <input type="number" name="final" id="final" required>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit">Submit</button>
             </form>
         </div>
-        <button type="submit">Submit</button>
     </div>
 
 </body>
