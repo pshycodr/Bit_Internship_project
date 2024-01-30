@@ -112,7 +112,13 @@
                         <input type="text" name="student_name" id="student_name">
 
                         <label for="student_department">Department : </label>
-                        <input type="text" name="student_department" id="student_department">
+                        <select name="student_department" id="student_department">
+                            <option> </option>
+                            <option value="CST">CST</option>
+                            <option value="IT">IT</opxtion>
+                            <option value="AE">AE</option>
+                            <option value="ETCE">ETCE</option>
+                        </select>
 
                         <label for="student_sem">Semister : </label>
                         <select name="student_sem" id="student_sem">
@@ -139,19 +145,19 @@
             <table>
                 <tr>
                     <td> <label for="subject1">C Program : </label>
-                        <input type="text" name="subject1" id="subject1" required>
+                        <input type="number" name="subject1" id="subject1" required>
                     </td>
                     <td> <label for="internal1">Python : </label>
-                        <input type="number" name="internal1" id="internal1" required>
+                        <input type="number" name="subject2" id="internal1" required>
                     </td>
                     <td><label for="internal2">CSO : </label>
-                        <input type="number" name="internal2" id="internal2" required>
+                        <input type="number" name="subject3" id="internal2" required>
                     </td>
                     <td> <label for="final">Data Structure : </label>
-                        <input type="number" name="final" id="final" required>
+                        <input type="number" name="subject4" id="final" required>
                     </td>
                     <td> <label for="final">Algorithm : </label>
-                        <input type="number" name="final" id="final" required>
+                        <input type="number" name="subject5" id="final" required>
                     </td>
                 </tr>
             </table>

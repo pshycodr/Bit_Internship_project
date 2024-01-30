@@ -68,17 +68,23 @@
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        <h2>Login</h2>
-        <label for="loginUserEmail">Email:</label>
-        <input type="email" id="loginUserEmail" name="loginEmail" placeholder="example@mail.com" required>
+        <h2>Sign Up</h2>
 
-        <label for="loginPassword">Password:</label>
-        <input type="password" id="loginPassword" name="loginPassword" required>
+        <label for="loginUserEmail">Name :</label>
+        <input type="text" id="loginUserEmail" name="signupName"  required>
 
-        <button type="submit">Login</button>
+        <label for="loginUserEmail">Phone no. :</label>
+        <input type="number" id="loginUserEmail" name="signupNumber"  required>
+
+        <label for="loginUserEmail">Email :</label>
+        <input type="email" id="loginUserEmail" name="signupEmail" placeholder="example@mail.com" required>
+
+        <label for="loginPassword">Password :</label>
+        <input type="password" id="loginPassword" name="signupPassword" required>
+
+        <button type="submit">Sign Up</button>
 
     </form>
-
 </body>
 
 </html>

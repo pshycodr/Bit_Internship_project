@@ -68,17 +68,16 @@
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        <h2>Login</h2>
-        <label for="loginUserEmail">Email:</label>
-        <input type="email" id="loginUserEmail" name="loginEmail" placeholder="example@mail.com" required>
+        <h2>Admin Login</h2>
+        <label for="loginUserEmail">Admin Email:</label>
+        <input type="email" id="loginUserEmail" name="Admin_UserEmail" placeholder="example@mail.com" required>
 
-        <label for="loginPassword">Password:</label>
-        <input type="password" id="loginPassword" name="loginPassword" required>
+        <label for="loginPassword">Admin Password:</label>
+        <input type="password" id="loginPassword" name="Admin_Password" required>
 
         <button type="submit">Login</button>
 
     </form>
-
 </body>
 
 </html>
