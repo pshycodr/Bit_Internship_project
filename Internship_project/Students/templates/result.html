@@ -112,7 +112,8 @@
 <body>
 
     <div class="container">
-
+        <form action="" method="post">
+            {% csrf_token %}
         <h2>Result:</h2>
         <table class="student_info">
             <tr>
@@ -140,13 +141,14 @@
             <tbody>
                 
                 <tr>
-                    <td class="col1">{{}}</td>
+                    <td class="col1"></td>
                     <td class="col4"></td>
                     <td class="col5"></td>
                 </tr>
             </tbody>
         </table>
         <button class="Print" type="submit">Print</button>
+    </form>
     </div>
 </body>
 

@@ -84,12 +84,18 @@ def register(request):
 
 
 # Input Reg no.
-def inputReg(request,a):
+def inputReg(request):
 
     regNo = request.POST.get("regNo")
     try:
         data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
-        return redirect('/student/result')
+        print(data)
+        # subjects = data['marks']
+        if data:
+            return redirect('/student/result/?reg='+regNo)
+        else:
+            print(f"No data found for Reg No. {regNo}")
+            return render(request, "result_not_found.html")
 
     except:
         print("Wrong Input")
@@ -98,10 +104,15 @@ def inputReg(request,a):
 
 
 
-# Result
+# # Result
 def result(request):
+    regNo = request.POST.get("reg")
     data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
 
     subjects = data['marks']
 
-    return render (request, "result.html", context = {'data':data, 'subjects':subjects})
+    return render (request, "result.html")
+# 
+
+
+

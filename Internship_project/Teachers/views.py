@@ -98,7 +98,7 @@ def teacherLogin(request):
   try:
      auth.sign_in_with_email_and_password(email, password)
      print("login successful")
-     return redirect( "/teach/marks")
+     return redirect( "/teach/marks?v="+email)
   except:
      print("invalid credentials")
   return render(request, 'login.html')
@@ -107,12 +107,15 @@ def teacherLogin(request):
 
 # Input Marks
 def marks(request):
+
+  createdBy = request.GET.get("v")
+  
   name = request.POST.get("student_name")
   department = request.POST.get("student_department")
   sem = request.POST.get("student_sem")
   reg = request.POST.get("regNo")
 
-  C = request.POST.get("subject1")
+  C_prog = request.POST.get("subject1")
   python = request.POST.get("subject2")
   cso = request.POST.get("subject3")
   ds = request.POST.get("subject4")
@@ -124,7 +127,7 @@ def marks(request):
     "Semister":sem, 
     "Registration no.":reg, 
     "Marks":{
-      "C programming":C, 
+      "C programming":C_prog, 
      "Python":python, 
       "CSO":cso, 
      "Data Structure":ds, 
