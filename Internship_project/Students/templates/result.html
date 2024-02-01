@@ -114,42 +114,68 @@
     <div class="container">
         <form action="" method="post">
             {% csrf_token %}
-        <h2>Result:</h2>
-        <table class="student_info">
-            <tr>
-                <td>Registration Number</td>
-                <td>11646464563</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>Anish Roy</td>
-            </tr>
-            <tr>
-                <td>Semister</td>
-                <td></td>
-            </tr>
-        </table>
+            <h2>Result:</h2>
+            
+            <table class="student_info">
+                <tr>
+                    <td>Registration Number</td>
+                    <td>{{ data['Registration no.'] }}</td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>{{ data['Name' ]}}</td>
+                </tr>
+                <tr>
+                    <td>Semester</td>
+                    <td>{{ data['Semister'] }}</td>
+                </tr>
+            </table>
+    
+            <table class="student_result">
+                <thead>
+                    <tr>
+                        <th class="col1">Subject Name</th>
+                        <th class="col2">Marks</th>
+                        <th class="col3">Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr {% if c_g == 'Fail' %} style="background-color: red;" {% endif %}>
+                        <td class="col1">Python</td>
+                        <td class="col2">{{ data['Marks']['C']}}</td>
+                        <td class="col3">{{ c_g }}</td>
+                    </tr>
 
-        <table class="student_result">
-            <thead>
-                <tr>
-                    <th class="col1">Subject Name</th>
-                    <th class="col4">Total Marks</th>
-                    <th class="col5">Result</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr>
-                    <td class="col1"></td>
-                    <td class="col4"></td>
-                    <td class="col5"></td>
-                </tr>
-            </tbody>
-        </table>
-        <button class="Print" type="submit">Print</button>
-    </form>
+                    <tr {% if py_g == 'Fail' %} style="background-color: red;" {% endif %}>
+                        <td class="col1">Python</td>
+                        <td class="col2">{{ data['Marks']['Python']}}</td>
+                        <td class="col3">{{ py_g }}</td>
+                    </tr>
+
+                    <tr {% if cso_g == 'Fail' %} style="background-color: red;" {% endif %}>
+                        <td class="col1">CSO</td>
+                        <td class="col2">{{ data['Marks']['CSO'] }}</td>
+                        <td class="col3">{{ cso_g }}</td>
+                    </tr>
+
+                    <tr {% if ds_g == 'Fail' %} style="background-color: red;" {% endif %}>
+                        <td class="col1">Data Structure</td>
+                        <td class="col2">{{ data['Marks']['Data structure'] }}</td>
+                        <td class="col3">{{ ds_g }}</td>
+                    </tr>
+
+                    <tr {% if al_g == 'Fail' %} style="background-color: red;" {% endif %}>
+                        <td class="col1">Data Structure</td>
+                        <td class="col2">{{ data['Marks']['Algorithm'] }}</td>
+                        <td class="col3">{{ al_g }}</td>
+                    </tr>
+\
+                </tbody>
+            </table>
+            <button class="Print" type="submit">Print</button>
+        </form>
     </div>
+    
 </body>
 
 </html>

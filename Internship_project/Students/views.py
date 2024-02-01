@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 import pyrebase
 import firebase_admin
 from firebase_admin import credentials, firestore
+import json
 
 # Create your views here.
 
@@ -85,21 +86,21 @@ def register(request):
 
 # Input Reg no.
 def inputReg(request):
-
     regNo = request.POST.get("regNo")
+    print(f" this is {regNo}")
+    
     try:
         data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
         print(data)
-        if data:
-            return redirect('/student/result?reg='+regNo)
-        else:
-            print(f"No data found for Reg No. {regNo}")
-            return render(request, "result_not_found.html")
+
+        redirect_url = f"/student/result?reg={regNo}"
+        return redirect(redirect_url)
 
     except:
-        print("Wrong Input")
+        print(f"No data found for Reg No. {regNo}")
     
-    return render(request,"reg_no.html")
+
+    return render(request, "reg_no.html")
 
 
 
@@ -107,25 +108,37 @@ def inputReg(request):
 def result(request):
     regNo = request.GET.get("reg")
 
-    try:
-        data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
+    print("data comming")
+    data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
 
-        total_marks = sum(int(data['Marks'][subject]) for subject in ['C programming', 'CSO', 'Python', 'Algorithm', 'Data Structure'])
-        avg_marks = total_marks / 5
+    total_marks = sum(int(data['Marks'][subject]) for subject in ['C programming', 'CSO', 'Python', 'Algorithm', 'Data Structure'])
+    avg_marks = total_marks / 5
 
-        cso_g = grade(int(data['Marks']['CSO']))
-        py_g = grade(int(data['Marks']['Python']))
-        c_g = grade(int(data['Marks']['C']))
-        al_g = grade(int(data['Marks']['algorithm']))
-        ds_g = grade(int(data['Marks']['Data structure']))
+    c_g = grade(int(data['Marks']['C programming']))
+    py_g = grade(int(data['Marks']['Python']))
+    cso_g = grade(int(data['Marks']['CSO']))
+    ds_g = grade(int(data['Marks']['Data Structure']))
+    al_g = grade(int(data['Marks']['Algorithm']))
 
-        m_g = grade(avg_marks)
+    m_g = grade(avg_marks)
 
-        return render(request, "result.html")
+    result_data = {
+        'data': data,
+        'cso_g': cso_g,
+        'py_g': py_g,
+        'c_g': c_g,
+        'al_g': al_g,
+        'ds_g': ds_g,
+        'm_g': m_g,
+        'total': total_marks
+    }
+    print(f"\n\n \n {data} \n\n\n {total_marks} \n\n\n {avg_marks} \n\n\n {result_data} \n\n\n")
+    return render(request, "result.html", result_data)
 
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        return render(request, "result_not_found.html")
+
+
+
+
 
 
 
@@ -134,23 +147,19 @@ def grade(avg):
     stat = ''
 
     if avg >= 91 and avg <= 100:
-        stat = "A1"
+        stat = "AA"
     elif avg >= 81 and avg < 91:
-        stat = "A2"
+        stat = "A"
     elif avg >= 71 and avg < 81:
-        stat = "B1"
+        stat = "B+"
     elif avg >= 61 and avg < 71:
-        stat = "B2"
+        stat = "B"
     elif avg >= 51 and avg < 61:
-        stat = "C1"
+        stat = "C+"
     elif avg >= 41 and avg < 51:
-        stat = "C2"
-    elif avg >= 33 and avg < 41:
-        stat = "D"
-    elif avg >= 21 and avg < 33:
-        stat = "E1"
-    elif avg >= 0 and avg < 21:
-        stat = "E2"
+        stat = "C"
+    elif avg <40: 
+        stat = "fail"
     else:
         stat = "Invalid Input!"
 
