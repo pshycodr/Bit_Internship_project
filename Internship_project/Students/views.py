@@ -90,9 +90,8 @@ def inputReg(request):
     try:
         data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
         print(data)
-        # subjects = data['marks']
         if data:
-            return redirect('/student/result/?reg='+regNo)
+            return redirect('/student/result?reg='+regNo)
         else:
             print(f"No data found for Reg No. {regNo}")
             return render(request, "result_not_found.html")
@@ -104,15 +103,58 @@ def inputReg(request):
 
 
 
-# # Result
+# Result
 def result(request):
-    regNo = request.POST.get("reg")
-    data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
+    regNo = request.GET.get("reg")
 
-    subjects = data['marks']
+    try:
+        data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
 
-    return render (request, "result.html")
-# 
+        total_marks = sum(int(data['Marks'][subject]) for subject in ['C programming', 'CSO', 'Python', 'Algorithm', 'Data Structure'])
+        avg_marks = total_marks / 5
+
+        cso_g = grade(int(data['Marks']['CSO']))
+        py_g = grade(int(data['Marks']['Python']))
+        c_g = grade(int(data['Marks']['C']))
+        al_g = grade(int(data['Marks']['algorithm']))
+        ds_g = grade(int(data['Marks']['Data structure']))
+
+        m_g = grade(avg_marks)
+
+        return render(request, "result.html")
+
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return render(request, "result_not_found.html")
+
+
+
+# Avg of numbers
+def grade(avg):
+    stat = ''
+
+    if avg >= 91 and avg <= 100:
+        stat = "A1"
+    elif avg >= 81 and avg < 91:
+        stat = "A2"
+    elif avg >= 71 and avg < 81:
+        stat = "B1"
+    elif avg >= 61 and avg < 71:
+        stat = "B2"
+    elif avg >= 51 and avg < 61:
+        stat = "C1"
+    elif avg >= 41 and avg < 51:
+        stat = "C2"
+    elif avg >= 33 and avg < 41:
+        stat = "D"
+    elif avg >= 21 and avg < 33:
+        stat = "E1"
+    elif avg >= 0 and avg < 21:
+        stat = "E2"
+    else:
+        stat = "Invalid Input!"
+
+    return stat
 
 
 
