@@ -74,7 +74,7 @@ def register(request):
         database.collection('Students Database').document(stdreg_num).set(student_data)
         print("account creation successful")
         print(f"Reg no. : {stdreg_num}")
-        return redirect("/student/student-registration/")
+        return redirect("/student/get-result/")
 
     except:
         print("something is wrong!!")
@@ -92,9 +92,8 @@ def inputReg(request):
     try:
         data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
         print(data)
-
-        redirect_url = f"/student/result?reg={regNo}"
-        return redirect(redirect_url)
+        if data == True:
+            return redirect(f"/student/result?reg={regNo}")
 
     except:
         print(f"No data found for Reg No. {regNo}")
