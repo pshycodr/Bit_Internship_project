@@ -117,10 +117,8 @@ def inputReg(request):
                 'm_g': m_g,
                 'total': total_marks
             }
-
-
-            emni = "anish"
-            return redirect("/student/result",{'emni':emni})
+            print(result_data)
+            return render(request, "result.html", {'result_data':result_data})
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -132,11 +130,11 @@ def inputReg(request):
 
 
 # Result
-def result(request):
-    # result_data = request.GET.get("data")
-    # print(result_data['data']['Registration_no.'])
-    # result_data_int= result_data['data']['Registration_no.']
-    return render(request, "result.html")
+# def result(request):
+#     # result_data = request.GET.get("data")
+#     # print(result_data['data']['Registration_no.'])
+#     # result_data_int= result_data['data']['Registration_no.']
+#     return render(request, "result.html")
 
 
 

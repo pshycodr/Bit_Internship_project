@@ -1,12 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Result</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #100721;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        form input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        form button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        form button:hover {
+            background-color: #3a8e3d;
+        }
+
+        .Print {
+            background-color: #243025;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        form button[type="reset"] {
+            background-color: #f44336;
+        }
+
+        form button[type="reset"]:hover {
+            background-color: rgb(181, 62, 53);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        th,
+        td {
+            border: 2px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .col1 {
+            font-weight: bolder;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        h2{
+            color: #4caf50;
+            font-size: 40px;
+        }
+        .col3{
+            background-color: #72ff77;
+        }
+        
+    </style>
+
 </head>
+
 <body>
-    <!-- <p>{{ result_data.data.Marks.CSO }}</p> -->
-    <p>{{ emni }}</p>
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h2>Result:</h2>
+
+            <!-- Debug output -->
+            {% if result_data %}
+                <table class="student_info">
+                    <!-- Your existing code for student_info table -->
+                </table>
+
+                <table class="student_result">
+                    <!-- Your existing code for student_result table -->
+                    <tbody>
+                        <tr class="" >
+                            <td class="col1">C Proramming</td>
+                            <td class="col2">{{ result_data.data.Marks.C_programming }}</td>
+                            <td class="col3" {% if result_data.c_g == 'fail' %} 
+                                style='background-color: rgb(247, 51, 51);' 
+                            {% endif %}>{{ result_data.c_g }}</td>
+                        </tr>
+
+                        <tr class="{% if result_data.c_g == 'Fail' %}fail{% endif %}">
+                            <td class="col1">Python</td>
+                            <td class="col2">{{ result_data.data.Marks.Python }}</td>
+                            <td class="col3" {% if result_data.py_g == 'fail' %} 
+                            style='background-color: red;' 
+                        {% endif %}>{{ result_data.py_g }}</td>
+                        </tr>
+
+                        <tr class="{% if result_data.c_g == 'Fail' %}fail{% endif %}">
+                            <td class="col1">CSO</td>
+                            <td class="col2">{{ result_data.data.Marks.CSO }}</td>
+                            <td class="col3" {% if result_data.cso_g == 'fail' %} 
+                            style='background-color: red;' 
+                        {% endif %}>{{ result_data.cso_g }}</td>
+                        </tr>
+
+                        <tr class="{% if result_data.c_g == 'Fail' %} style='background-color: red;' {% endif %}">
+                            <td class="col1">Data Structure</td>
+                            <td class="col2">{{ result_data.data.Marks.Data_Structure }}</td>
+                            <td class="col3" {% if result_data.ds_g == 'fail' %} 
+                            style='background-color: red;' 
+                        {% endif %}>{{ result_data.ds_g }}</td>
+                        </tr>
+
+                        <tr class="{% if result_data.c_g == 'Fail' %}fail{% endif %}">
+                            <td class="col1">Algorithm</td>
+                            <td class="col2">{{ result_data.data.Marks.Algorithm }}</td>
+                            <td class="col3" {% if result_data.al_g == 'fail' %} 
+                            style='background-color: red;' 
+                        {% endif %}>{{ result_data.al_g }}</td>
+                        </tr>
+
+                        <tr>
+                            <td class="col1">Total</td>
+                            <td class="col2">{{ result_data.total }}</td>
+                            <td class="col3" {% if result_data.m_g == 'fail' %} 
+                            style='background-color: red;' 
+                        {% endif %}>{{ result_data.m_g }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="print" type="submit">Print</button>
+            {% else %}
+                <p>No data found for Registration Number: {{ regNo }}</p>
+            {% endif %}
+        </form>
+    </div>
 </body>
-</html>
+    
+    
+    
+    
+</body>
+
+</html> 
+
+
