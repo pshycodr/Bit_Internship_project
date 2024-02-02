@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 import pyrebase
 import firebase_admin
 from firebase_admin import credentials, firestore
-import json
 
 # Create your views here.
 
@@ -67,7 +66,6 @@ def register(request):
     "Email": stdemail,
     "Password": stdpassword,
     "Registration Number": stdreg_num,
-    # Add more fields as needed
     }
     try:
         auth.create_user_with_email_and_password(stdemail, stdpassword) 
@@ -87,6 +85,8 @@ def register(request):
 # Input Reg no.
 def inputReg(request):
     regNo = request.POST.get("regNo")
+
+    
     print(f" this is {regNo}")
     print(type(regNo))
     
@@ -118,11 +118,9 @@ def inputReg(request):
                 'total': total_marks
             }
 
-            print("helooooooooooooooooooo")
-            print(result_data)
-            print(result_data['data']['Registration_no.'])
 
-            return redirect("/student/result?data=",result_data)
+            emni = "anish"
+            return redirect("/student/result",{'emni':emni})
 
     except Exception as e:
         print(f"An error occurred: {e}")
