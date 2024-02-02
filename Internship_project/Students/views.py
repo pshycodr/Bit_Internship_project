@@ -88,51 +88,57 @@ def register(request):
 def inputReg(request):
     regNo = request.POST.get("regNo")
     print(f" this is {regNo}")
+    print(type(regNo))
     
     try:
-        data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
-        print(data)
-        if data == True:
-            return redirect(f"/student/result?reg={regNo}")
+        data = database.collection('Students Marks').document(regNo).get().to_dict()
+        print(type(data))
+        print("data comming")
 
-    except:
+        if data:
+            total_marks = sum(int(data['Marks'][subject]) for subject in ['C_programming', 'CSO', 'Python', 'Algorithm', 'Data_Structure'])
+            avg_marks = total_marks / 5
+
+            c_g = grade(int(data['Marks']['C_programming']))
+            py_g = grade(int(data['Marks']['Python']))
+            cso_g = grade(int(data['Marks']['CSO']))
+            ds_g = grade(int(data['Marks']['Data_Structure']))
+            al_g = grade(int(data['Marks']['Algorithm']))
+
+            m_g = grade(avg_marks)
+
+            result_data = {
+                'data': data,
+                'cso_g': cso_g,
+                'py_g': py_g,
+                'c_g': c_g,
+                'al_g': al_g,
+                'ds_g': ds_g,
+                'm_g': m_g,
+                'total': total_marks
+            }
+
+            print("helooooooooooooooooooo")
+            print(result_data)
+            print(result_data['data']['Registration_no.'])
+
+            return redirect("/student/result?data=",result_data)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
         print(f"No data found for Reg No. {regNo}")
-    
 
     return render(request, "reg_no.html")
 
 
 
+
 # Result
 def result(request):
-    regNo = request.GET.get("reg")
-
-    print("data comming")
-    data = database.collection('Students Marks').document(str(regNo)).get().to_dict()
-
-    total_marks = sum(int(data['Marks'][subject]) for subject in ['C programming', 'CSO', 'Python', 'Algorithm', 'Data Structure'])
-    avg_marks = total_marks / 5
-
-    c_g = grade(int(data['Marks']['C programming']))
-    py_g = grade(int(data['Marks']['Python']))
-    cso_g = grade(int(data['Marks']['CSO']))
-    ds_g = grade(int(data['Marks']['Data Structure']))
-    al_g = grade(int(data['Marks']['Algorithm']))
-
-    m_g = grade(avg_marks)
-
-    result_data = {
-        'data': data,
-        'cso_g': cso_g,
-        'py_g': py_g,
-        'c_g': c_g,
-        'al_g': al_g,
-        'ds_g': ds_g,
-        'm_g': m_g,
-        'total': total_marks
-    }
-    print(f"\n\n \n {data} \n\n\n {total_marks} \n\n\n {avg_marks} \n\n\n {result_data} \n\n\n")
-    return render(request, "result.html", result_data)
+    # result_data = request.GET.get("data")
+    # print(result_data['data']['Registration_no.'])
+    # result_data_int= result_data['data']['Registration_no.']
+    return render(request, "result.html")
 
 
 

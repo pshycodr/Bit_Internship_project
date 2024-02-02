@@ -125,12 +125,12 @@ def marks(request):
     "Name":name, 
     "Department": department, 
     "Semister":sem, 
-    "Registration no.":reg, 
+    "Registration_no.":reg, 
     "Marks":{
-      "C programming":C_prog, 
+      "C_programming":C_prog, 
      "Python":python, 
       "CSO":cso, 
-     "Data Structure":ds, 
+     "Data_Structure":ds, 
       "Algorithm":algo
     },
   }
