@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
 import pyrebase
+
 import firebase_admin
 from firebase_admin import credentials, firestore
+
+from fpdf import FPDF
+import datetime
+
 
 # Create your views here.
 
@@ -118,7 +123,7 @@ def inputReg(request):
                 'total': total_marks
             }
             print(result_data)
-            return render(request, "result.html", {'result_data':result_data})
+            return render (request, "result.html", {'result_data':result_data})
 
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -128,13 +133,6 @@ def inputReg(request):
 
 
 
-
-# Result
-# def result(request):
-#     # result_data = request.GET.get("data")
-#     # print(result_data['data']['Registration_no.'])
-#     # result_data_int= result_data['data']['Registration_no.']
-#     return render(request, "result.html")
 
 
 
@@ -167,4 +165,144 @@ def grade(avg):
     return stat
 
 
+
+# pass of fail in each subject
+def pf(avg):
+    stat= ''
+    if avg >= 35:
+	    stat = 'P'
+    else:
+        stat = 'F'
+
+    return stat    
+
+
+
+
+# To make pdf of result
+def makepdf(request):
+
+    regNo = request.GET.get("regNo")
+    print(f"make pdf {regNo}")
+    data = database.collection('Students Marks').document(regNo).get().to_dict()
+
+    if data:
+        total_marks = sum(int(data['Marks'][subject]) for subject in ['C_programming', 'CSO', 'Python', 'Algorithm', 'Data_Structure'])
+        avg_marks = total_marks / 5
+
+        c_g = grade(int(data['Marks']['C_programming']))
+        py_g = grade(int(data['Marks']['Python']))
+        cso_g = grade(int(data['Marks']['CSO']))
+        ds_g = grade(int(data['Marks']['Data_Structure']))
+        al_g = grade(int(data['Marks']['Algorithm']))
+
+        m_g = grade(avg_marks)
+
+        c_pf = pf(int(data['Marks']['C_programming']))
+        py_pf = pf(int((data['Marks']['Python'])))
+        cso_pf = pf(int((data['Marks']['CSO'])))
+        ds_pf = pf(int((data['Marks']['Data_Structure'])))
+        al_pf = pf(int((data['Marks']['Algorithm'])))
+
+
+        pdf = FPDF();
+        pdf.add_page()
+        pdf.set_font('Arial', '', 16)
+
+        # College Name and Logo
+        # pdf.image('icvp.jpg', 10, 8, 25)
+        pdf.cell(45, 5, '', 0, 0)
+        pdf.cell(159, 5, 'BENGAL INSTITUTE OF TECHNOLOGY', 0, 1)
+        pdf.cell(45, 5, '', 0, 1)
+        pdf.cell(45, 5, '', 0, 1)
+
+        # Name
+        pdf.cell(19,5,'Name:',0,0);
+        pdf.cell(100,5,data['Name'],0,0);
+
+        #ROLL NO
+        pdf.cell(42,5,'College Roll No:',0,0);
+        pdf.cell(22,5,data['Roll'],0,1);
+        pdf.cell(22,5,'',0,1);
+
+        #Department
+        pdf.cell(25,5,'Stream:',0,0);
+        pdf.cell(35,5,data['Department'],0,0);
+
+        #Semester
+        pdf.cell(18,5,'Sem:',0,0);
+        pdf.cell(40,5,data['Semister'],0,0);
+
+        #COURSE
+        pdf.cell(32,5,'Course:',0,0);
+        pdf.cell(22,5,'DIPLOMA',0,1);
+
+        # draw line
+        pdf.line(20, 45, 210-20, 45,);
+        pdf.ln(16);
+        pdf.cell(0,0,'',0,1);
+        pdf.cell(0,0,'',0,1);
+
+
+        pdf.cell(100,5,'Subject Name:',0,0);
+        pdf.cell(23,5,'Marks',0,0);
+        pdf.cell(23,5,'Grade',0,0);
+        pdf.cell(13,5,'Status',0,1);
+        pdf.cell(10,5,'',0,1);
+
+
+        pdf.cell(100,5,'C PROGRAMING',0,0);
+        pdf.cell(23,5,data['Marks']['C_programming'],0,0);
+        pdf.cell(23,5,c_g,0,0);
+        pdf.cell(13,5,c_pf,0,1);
+        pdf.cell(10,5,'',0,1);
+
+        pdf.cell(100,5,'PYTHON',0,0);
+        pdf.cell(23,5,data['Marks']['Python'],0,0);
+        pdf.cell(23,5,py_g,0,0);
+        pdf.cell(13,5,py_pf,0,1);
+        pdf.cell(10,5,'',0,1);
+
+
+        pdf.cell(100,5,'CSO',0,0);
+        pdf.cell(23,5,data['Marks']['CSO'],0,0);
+        pdf.cell(23,5,cso_g,0,0);
+        pdf.cell(13,5,cso_pf,0,1);
+        pdf.cell(10,5,'',0,1);
+
+
+        pdf.cell(100,5,'DATA STRUCTURE',0,0);
+        pdf.cell(23,5,data['Marks']['Data_Structure'],0,0);
+        pdf.cell(23,5,ds_g,0,0);
+        pdf.cell(13,5,ds_pf,0,1);
+        pdf.cell(10,5,'',0,1);
+
+        pdf.cell(100,5,'ALGORITHM',0,0);
+        pdf.cell(23,5,data['Marks']['Algorithm'],0,0);
+        pdf.cell(23,5,al_g,0,0);
+        pdf.cell(13,5,al_pf,0,1);
+        pdf.cell(10,5,'',0,1);
+
+        #draw line
+        pdf.line(20, 45, 210-20, 45,);
+        pdf.ln(2);
+        pdf.cell(0,0,'',0,1);
+        pdf.cell(0,0,'',0,1);
+
+        pdf.cell(100,5,'Total Marks:',0,0);
+        pdf.cell(23,5,str(total_marks),0,1);
+        pdf.cell(10,5,'',0,1);
+        pdf.cell(100,5,'Average Marks:',0,0);
+        pdf.cell(23,5,str(avg_marks),0,1);
+        pdf.cell(10,5,'',0,1);
+        pdf.cell(100,5,'Grade:',0,0);
+        pdf.cell(23,5,m_g ,0,1);
+
+        pdf.cell(100,120,'',0,1);
+        pdf.cell(110,5,'This is diigitally signed :',0,0);
+        pdf.cell(23,5,str(datetime.datetime.now()),0,0);
+
+        pdf.output(regNo+'.pdf')
+        
+    return render(request, 'result.html')
 

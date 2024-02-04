@@ -121,12 +121,23 @@
 
             <!-- Debug output -->
             {% if result_data %}
-                <table class="student_info">
-                    <!-- Your existing code for student_info table -->
-                </table>
+            <table class="student_info">
+                <tr>
+                    <td>Name</td>
+                    <td>{{ result_data.data.Name}}</td>
+                </tr>
+                <tr>
+                      <td>Register Number</td>
+                    <td>{{result_data.data.Registration_no}}</td>
+                </tr>
+                <tr>
+                    <td>SEMESTER</td>
+                    <td>{{result_data.data.Semister}}</td>
+                </tr>
+            </table>
 
                 <table class="student_result">
-                    <!-- Your existing code for student_result table -->
+
                     <tbody>
                         <tr class="" >
                             <td class="col1">C Proramming</td>
@@ -177,9 +188,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <button class="print" type="submit">Print</button>
+                <button class="print" type="submit"><a href="/student/makepdf?regNo={{result_data.data.Registration_no}}">Download</a></button>
             {% else %}
-                <p>No data found for Registration Number: {{ regNo }}</p>
+                <p>No data found for Registration Number: {{ result_data.data.Registration_no. }}</p>
             {% endif %}
         </form>
     </div>
